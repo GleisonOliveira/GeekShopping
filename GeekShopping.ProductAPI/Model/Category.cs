@@ -7,7 +7,7 @@ namespace GeekShopping.ProductAPI.Model
     [Table("category")]
     public class Category: BaseEntity
     {
-        [Required]
+        [Required()]
         [StringLength(255)]
         [Column("name")]
         public string Name { get; set; }

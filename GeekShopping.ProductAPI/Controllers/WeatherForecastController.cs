@@ -1,3 +1,4 @@
+using GeekShopping.ProductAPI.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GeekShopping.ProductAPI.Controllers
