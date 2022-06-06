@@ -120,6 +120,12 @@
   <data name="One or more validation errors occurred." xml:space="preserve">
     <value>Um ou mais erros de validação ocorreram.</value>
   </data>
+  <data name="ProductRepository.DeleteAsync.The product was not founded." xml:space="preserve">
+    <value>O produto não foi encontrado.</value>
+  </data>
+  <data name="ProductRepository.FindByIdAsync.The product was not founded." xml:space="preserve">
+    <value>O produto não foi encontrado.</value>
+  </data>
   <data name="The value '{0}' is not valid." xml:space="preserve">
     <value>O valor '{0}' não é valido.</value>
   </data>

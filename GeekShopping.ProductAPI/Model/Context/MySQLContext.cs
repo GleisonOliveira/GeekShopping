@@ -2,6 +2,9 @@
 
 namespace GeekShopping.ProductAPI.Model.Context
 {
+    /// <summary>
+    /// Create a db context do mysql
+    /// </summary>
     public class MySQLContext: DbContext
     {
         public MySQLContext()

@@ -7,6 +7,9 @@ using GeekShopping.ProductAPI.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using GeekShopping.ProductAPI.Errors;
 using Microsoft.Extensions.Localization;
+using GeekShopping.ProductAPI.Config;
+using GeekShopping.ProductAPI.Repository;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,14 +17,28 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connection = builder.Configuration["MySQLConnection:MySQLConnectionString"];
 
+// add a translator service
 builder.Services.AddScoped<TranslatorService>();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// add a db context to database
 builder.Services.AddDbContext<MySQLContext>(options => {
     options.UseMySql(connection, new MySqlServerVersion(new Version(10, 4, 21)));
 });
+
+// add a automapper
+builder.Services.AddSingleton(MappingConfig.RegisterMaps().CreateMapper());
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+// register the repositories
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+// add a folder as localization
 builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+// configure mvc options and messages to translate
 builder.Services.AddMvc(options =>
         {
             var provider = builder.Services.BuildServiceProvider();
@@ -59,9 +76,16 @@ builder.Services.AddMvc(options =>
 
             options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor((x) =>
                 localizer["The value '{0}' is invalid.", x]);
+
+        })
+        .AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.MaxDepth = 0;
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         })
         .ConfigureApiBehaviorOptions(options =>
         {
+            // add a translator service and call bad request error to translate the errors
             options.InvalidModelStateResponseFactory = context =>
             {
                 var provider = builder.Services.BuildServiceProvider();
@@ -77,11 +101,13 @@ builder.Services.AddMvc(options =>
                 factory.Create(typeof(SharedResources));
         });
 
+// add a problem details to catch exceptions
 builder.Services.AddProblemDetails(options =>
 {
     var provider = builder.Services.BuildServiceProvider();
     var translator = provider.GetService<TranslatorService>();
 
+    // create a map of exceptions and call translator to convert exception in problem details.
     options.IncludeExceptionDetails = (ctx, ex) => builder.Environment.IsDevelopment();
     options.Map<BaseException>(ex => translator.convertExceptionToProblemDetails(ex));
 });
@@ -97,6 +123,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// create a list of supported languages
 var supportedCultures = new[] { "pt-BR" };
 var localizationOptions = new RequestLocalizationOptions()
     .SetDefaultCulture(supportedCultures[0])

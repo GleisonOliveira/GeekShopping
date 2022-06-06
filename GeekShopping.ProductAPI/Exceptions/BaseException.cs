@@ -1,16 +1,19 @@
 ﻿namespace GeekShopping.ProductAPI.Exceptions
 {
+    /// <summary>
+    /// Base class to all exceptions
+    /// </summary>
     public class BaseException: ApplicationException
     {
-        public string Detail { get; private set; }
+        public string Detail { get; protected set; }
 
-        public string Action { get; private set; }
+        public string Action { get; protected set; }
 
-        public string Controller { get; private set; }
+        public string Controller { get; protected set; }
 
-        public int Status { get; private set; }
+        public int Status { get; protected set; }
 
-        public IDictionary<string, string[]> Errors { get; set; } = new Dictionary<string, string[]>();
+        public IDictionary<string, string[]> Errors { get; protected set; } = new Dictionary<string, string[]>();
 
         public BaseException(string detail, string action, string controller, int status = 400): base(detail)
         {

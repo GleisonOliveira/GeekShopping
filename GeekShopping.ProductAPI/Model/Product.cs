@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeekShopping.ProductAPI.Model
 {
+    /// <summary>
+    /// Represent a product in db
+    /// </summary>
     [Table("product")]
     public class Product : BaseEntity
     {
@@ -22,8 +25,7 @@ namespace GeekShopping.ProductAPI.Model
         public string Description { get; set; }
 
         [Required]
-        [Column("CategoryId")]
-        public string CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
         public Category Category { get; set; }
 

@@ -5,6 +5,9 @@ using Microsoft.Extensions.Localization;
 
 namespace GeekShopping.ProductAPI.Services
 {
+    /// <summary>
+    /// Translate all messages in current locale
+    /// </summary>
     public class TranslatorService
     {
         private readonly IStringLocalizer<SharedResources> _localizer;
@@ -55,7 +58,12 @@ namespace GeekShopping.ProductAPI.Services
             return problemDetails;
         }
 
-        public IDictionary<string, string[]> translateErrors(IDictionary<string, string[]> errors, string? controller = null, string? action = null)
+        /// <summary>
+        /// Translate all errors in a dictionary of errors
+        /// </summary>
+        /// <param name="errors"></param>
+        /// <returns></returns>
+        public IDictionary<string, string[]> translateErrors(IDictionary<string, string[]> errors)
         {
             foreach (var error in errors)
             {

@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GeekShopping.ProductAPI.Model.Base
 {
+    /// <summary>
+    /// Base to all entities
+    /// </summary>
     public class BaseEntity
     {
         [Key]

@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GeekShopping.ProductAPI.Errors
 {
+    /// <summary>
+    /// This class convert a a badrequest in a problem details
+    /// </summary>
     public class BadRequestError : ValidationProblemDetails
     {
         private readonly object? _action;
