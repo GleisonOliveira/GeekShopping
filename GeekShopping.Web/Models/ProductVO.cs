@@ -1,0 +1,16 @@
+﻿namespace GeekShopping.Web.Models
+{
+    public class ProductVO
+    {
+        public long Id { get; set; }
+        public string Name { get; set; }
+
+        public decimal Price { get; set; }
+
+        public string Description { get; set; }
+
+        public ProductCategoryVO Category { get; set; }
+
+        public string ImageURL { get; set; }
+    }
+}

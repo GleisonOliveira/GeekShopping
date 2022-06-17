@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{CF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeekShopping.ProductAPI", "GeekShopping.ProductAPI\GeekShopping.ProductAPI.csproj", "{0F079287-1811-4F5C-AF94-3ECA3D1F5304}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{BB88B641-3603-4B45-802D-5D33D851D61C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,7 +32,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B683E1E6-F195-4A31-B6E4-7F0F1FE66DDA} = {0F7DD49F-7B0F-4F19-91A5-6DEC9CCED585}
 		{0F079287-1811-4F5C-AF94-3ECA3D1F5304} = {CF16F9F8-BC9C-4AD0-9FB0-EE3D7DB6C390}
-		{BB88B641-3603-4B45-802D-5D33D851D61C} = {CF16F9F8-BC9C-4AD0-9FB0-EE3D7DB6C390}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {204C1B5F-A5E6-4602-BA07-A57F2F06CCD8}
