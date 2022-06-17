@@ -16,6 +16,13 @@ namespace GeekShopping.ProductAPI.Model.Context
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Category>().HasData(new Category { Id = 1, Name = "Roupas" });
+
+            modelBuilder.Entity<Product>().HasData(new Product { Id = 1, Name = "Camiseta", CategoryId = 1, Description ="Camiseta", Price = new decimal(5.0), ImageURL = "url" });
+        }
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Product> Products { get; set; }
